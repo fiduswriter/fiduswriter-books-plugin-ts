@@ -1,6 +1,6 @@
 {
     "name": "@fiduswriter/books-document",
-    "version": "0.1.9",
+    "version": "0.1.10",
     "description": "Fidus Writer book importers and exporters",
     "repository": {
         "type": "git",
@@ -72,7 +72,8 @@
         "dist/",
         "src/",
         "README.md",
-        "LICENSE"
+        "LICENSE",
+        "locale/*/messages.json"
     ],
     "scripts": {
         "build": "tsc",
@@ -84,32 +85,35 @@
         "lint:fix": "eslint src test --fix",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
-        "install-hooks": "husky"
+        "install-hooks": "husky",
+        "compile-i18n": "node scripts/compile-i18n.js",
+        "extract-i18n": "node scripts/extract-i18n.js"
     },
     "dependencies": {
-        "@fiduswriter/document": "^0.2.20",
+        "@fiduswriter/document": "^0.2.32",
         "@vivliostyle/print": "^2.42.0",
         "bibliojson": "^4.0.4",
         "downloadjs": "^1.4.7",
         "fast-deep-equal": "^3.1.3",
-        "fwtoolkit": "^0.2.0",
+        "fwtoolkit": "^0.2.4",
         "jszip": "^3.10.1",
         "pretty": "^2.0.0"
     },
     "devDependencies": {
+        "@eslint/js": "^10.0.1",
         "@types/node": "^26.0.1",
+        "eslint": "^10.6.0",
+        "gettext-parser": "^9.1.1",
+        "globals": "^15.15.0",
+        "husky": "^9.1.7",
         "jest": "^30.4.2",
+        "lint-staged": "^17.0.8",
+        "prettier": "^3.8.5",
+        "prosemirror-model": "^1.25.0",
         "ts-jest": "^29.1.2",
         "ts-jest-resolver": "^2.0.1",
         "typescript": "^6.0.3",
-        "@eslint/js": "^10.0.1",
-        "eslint": "^10.6.0",
-        "globals": "^15.15.0",
-        "prettier": "^3.8.5",
-        "typescript-eslint": "^8.62.0",
-        "prosemirror-model": "^1.25.0",
-        "husky": "^9.1.7",
-        "lint-staged": "^17.0.8"
+        "typescript-eslint": "^8.62.0"
     },
     "lint-staged": {
         "*.{ts,js,mjs,css,md,json,html}": [
