@@ -2,9 +2,26 @@
     "name": "@fiduswriter/books-document",
     "version": "0.1.13",
     "description": "Fidus Writer book importers and exporters",
+    "keywords": [
+        "fiduswriter",
+        "books",
+        "document",
+        "epub",
+        "docx",
+        "odt",
+        "latex",
+        "html",
+        "bits",
+        "export",
+        "import"
+    ],
+    "homepage": "https://codeberg.org/fiduswriter/fiduswriter-books-document-js#readme",
+    "bugs": {
+        "url": "https://codeberg.org/fiduswriter/fiduswriter-books-document-js/issues"
+    },
     "repository": {
         "type": "git",
-        "url": "ssh://git@codeberg.org/fiduswriter/fiduswriter-books-document.git"
+        "url": "ssh://git@codeberg.org/fiduswriter/fiduswriter-books-document-js.git"
     },
     "license": "AGPL-3.0",
     "author": "Johannes Wilm",
