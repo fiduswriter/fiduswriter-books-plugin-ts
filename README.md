@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.svg" alt="@fiduswriter/books-document" width="100" height="100">
+  <img src="https://codeberg.org/fiduswriter/fiduswriter-books-document-js/raw/branch/main/logo.svg" alt="@fiduswriter/books-document" width="100" height="100">
 </p>
 
 <h1 align="center">@fiduswriter/books-document</h1>

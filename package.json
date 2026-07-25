@@ -73,6 +73,7 @@
         "src/",
         "README.md",
         "LICENSE",
+        "logo.svg",
         "locale/*/messages.json"
     ],
     "scripts": {
