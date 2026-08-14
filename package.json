@@ -15,13 +15,13 @@
         "export",
         "import"
     ],
-    "homepage": "https://codeberg.org/fiduswriter/fiduswriter-books-document-js#readme",
+    "homepage": "https://codeberg.org/fiduswriter/fiduswriter-books-plugin-ts#readme",
     "bugs": {
-        "url": "https://codeberg.org/fiduswriter/fiduswriter-books-document-js/issues"
+        "url": "https://codeberg.org/fiduswriter/fiduswriter-books-plugin-ts/issues"
     },
     "repository": {
         "type": "git",
-        "url": "ssh://git@codeberg.org/fiduswriter/fiduswriter-books-document-js.git"
+        "url": "ssh://git@codeberg.org/fiduswriter/fiduswriter-books-plugin-ts.git"
     },
     "license": "AGPL-3.0",
     "author": "Johannes Wilm",

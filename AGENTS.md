@@ -1,19 +1,19 @@
 # AGENTS.md — @fiduswriter/books-document
 
 This file contains information for AI coding agents working on the
-`fiduswriter-books-document` repository. Read this first if you are unfamiliar
+`fiduswriter-books-plugin-ts` repository. Read this first if you are unfamiliar
 with the project.
 
 ## Project overview
 
 `@fiduswriter/books-document` is a TypeScript library that implements
 book-level importers and exporters for Fidus Writer. It builds on top of
-`@fiduswriter/document` and is consumed by both the `fiduswriter-books` Django
-plugin and the `@fiduswriter/cli` command-line converter.
+`@fiduswriter/document` and is consumed by both the `fiduswriter-books-plugin`
+Django plugin and the `@fiduswriter/cli` command-line converter.
 
 - Package name: `@fiduswriter/books-document`
 - License: `AGPL-3.0`
-- Repository: `https://codeberg.org/fiduswriter/fiduswriter-books-document.git`
+- Repository: `https://codeberg.org/fiduswriter/fiduswriter-books-plugin-ts.git`
 - Author: Johannes Wilm
 
 ## Scope
