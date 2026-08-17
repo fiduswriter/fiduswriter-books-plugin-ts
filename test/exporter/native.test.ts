@@ -1,6 +1,7 @@
 import {describe, expect, it} from "@jest/globals"
 import JSZip from "jszip"
 
+import {FW_DOCUMENT_VERSION} from "@fiduswriter/document/schema"
 import {NativeBookExporter} from "../../src/exporter/native/index.js"
 import {FidusBookReader} from "../../src/importer/native/reader.js"
 import {makeBook, makeDocumentList, schema, user} from "./support.js"
@@ -30,9 +31,11 @@ describe("Native book exporter / reader round-trip", () => {
         expect(zip.files["filetype-version"]).toBeDefined()
         expect(zip.files["mimetype"]).toBeDefined()
         expect(await zip.file("mimetype")?.async("string")).toBe(
-            "application/fidusbook+zip"
+            "application/vnd.fiduswriter.book+zip"
         )
-        expect(await zip.file("filetype-version")?.async("string")).toBe("1.0")
+        expect(await zip.file("filetype-version")?.async("string")).toBe(
+            FW_DOCUMENT_VERSION
+        )
 
         const bookJson = JSON.parse(
             (await zip.file("book.json")?.async("string")) as string

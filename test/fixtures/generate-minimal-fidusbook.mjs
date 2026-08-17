@@ -45,8 +45,9 @@ const book = {
 }
 
 const zip = new JSZip()
-zip.file("mimetype", "application/fidusbook+zip", {compression: "STORE"})
-zip.file("filetype-version", "1.0")
+zip.file("mimetype", "application/vnd.fiduswriter.book+zip", {compression: "STORE"})
+// The book archive version tracks the Fidus Writer document version.
+zip.file("filetype-version", "3.7")
 zip.file("book.json", JSON.stringify(book))
 
 const chapterTitles = ["Chapter One", "Chapter Two"]

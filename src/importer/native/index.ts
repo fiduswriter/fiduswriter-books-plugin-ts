@@ -13,6 +13,11 @@ import type {BookImporterBackend, Chapter, User} from "../../types.js"
 
 export {FIDUSBOOK_VERSION} from "./reader.js"
 export {readFidusBookFile, FidusBookReader} from "./reader.js"
+import {
+    FIDUSBOOK_MIMETYPES,
+    MIN_FIDUSBOOK_VERSION,
+    MAX_FIDUSBOOK_VERSION
+} from "./reader.js"
 
 export interface E2EEOptionsResult {
     options: E2EEOptions
@@ -144,8 +149,8 @@ export class NativeBookImporter {
         const filetypeVersion = Number.parseFloat(versionEntry?.content || "")
 
         if (
-            filetypeVersion < 1.0 ||
-            filetypeVersion > 1.0
+            filetypeVersion < MIN_FIDUSBOOK_VERSION ||
+            filetypeVersion > MAX_FIDUSBOOK_VERSION
         ) {
             this.statusText =
                 gettext(
@@ -157,7 +162,7 @@ export class NativeBookImporter {
         const mimetypeEntry = textFiles.find(f => f.filename === "mimetype")
         if (
             mimetypeEntry &&
-            mimetypeEntry.content !== "application/fidusbook+zip"
+            !FIDUSBOOK_MIMETYPES.includes(mimetypeEntry.content)
         ) {
             this.statusText = gettext(
                 "The uploaded file does not appear to be a Fidusbook file."

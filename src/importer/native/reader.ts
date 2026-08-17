@@ -7,10 +7,21 @@
  */
 
 import type {DocumentListEntry} from "../../types.js"
+import {FW_DOCUMENT_VERSION} from "@fiduswriter/document/schema"
+import {MAX_FW_DOCUMENT_VERSION} from "@fiduswriter/document/importer/native"
 
-export const FIDUSBOOK_VERSION = "1.0"
+export const FIDUSBOOK_MIMETYPES = [
+    "application/fidusbook+zip",
+    "application/vnd.fiduswriter.book+zip"
+]
+/**
+ * The Fidus Writer book archive version tracks the document version; there is
+ * no independent book version. Legacy book archives (before the unification)
+ * used version 1.0, which is still accepted for reading.
+ */
+export const FIDUSBOOK_VERSION = FW_DOCUMENT_VERSION
 export const MIN_FIDUSBOOK_VERSION = 1.0
-export const MAX_FIDUSBOOK_VERSION = 1.0
+export const MAX_FIDUSBOOK_VERSION = MAX_FW_DOCUMENT_VERSION
 
 interface ArchiveFile {
     filename: string
@@ -84,7 +95,7 @@ export async function readFidusBookFile(
     const mimetypeEntry = textFiles.find(f => f.filename === "mimetype")
     if (
         mimetypeEntry &&
-        mimetypeEntry.content !== "application/fidusbook+zip"
+        !FIDUSBOOK_MIMETYPES.includes(mimetypeEntry.content as string)
     ) {
         throw new Error("The file does not appear to be a Fidusbook file.")
     }

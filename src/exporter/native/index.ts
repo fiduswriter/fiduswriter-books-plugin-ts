@@ -189,7 +189,7 @@ export class NativeBookExporter {
                 textFiles,
                 httpFiles,
                 [],
-                "application/fidusbook+zip",
+                "application/vnd.fiduswriter.book+zip",
                 new Date(this.updated * 1000)
             )
             return zipper.init().then(blob => this.download(blob))
