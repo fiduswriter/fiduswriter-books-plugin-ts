@@ -13,7 +13,7 @@ Django plugin and the `@fiduswriter/cli` command-line converter.
 
 - Package name: `@fiduswriter/books-document`
 - License: `AGPL-3.0`
-- Repository: `https://codeberg.org/fiduswriter/fiduswriter-books-plugin-ts.git`
+- Repository: `https://git.fiduswriter.org/fiduswriter/fiduswriter-books-plugin-ts.git`
 - Author: Johannes Wilm
 
 ## Scope
