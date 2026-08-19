@@ -2,22 +2,23 @@
 export default {
     rootDir: ".",
     testEnvironment: "node",
-    resolver: "ts-jest-resolver",
     extensionsToTreatAsEsm: [".ts"],
     transform: {
         "^.+\\.ts$": [
-            "ts-jest",
+            "@swc/jest",
             {
-                useESM: true,
-                tsconfig: {
-                    module: "NodeNext",
-                    moduleResolution: "NodeNext"
+                jsc: {
+                    parser: {
+                        syntax: "typescript"
+                    },
+                    target: "es2020"
                 }
             }
         ]
     },
     moduleDirectories: ["node_modules"],
     moduleNameMapper: {
+        "^(\\.{1,2}/.*)\\.js$": "$1",
         "^downloadjs$": "<rootDir>/test/exporter/mocks/downloadjs.js",
         "^pretty$": "<rootDir>/test/exporter/mocks/pretty.js",
         "^fwtoolkit$": "<rootDir>/test/exporter/mocks/fwtoolkit.js",
