@@ -108,7 +108,7 @@
         "extract-i18n": "node scripts/extract-i18n.js"
     },
     "dependencies": {
-        "@fiduswriter/document": "^0.3.3",
+        "@fiduswriter/document": "^0.3.5",
         "@vivliostyle/print": "^2.44.1",
         "bibliojson": "^4.0.4",
         "downloadjs": "^1.4.7",
