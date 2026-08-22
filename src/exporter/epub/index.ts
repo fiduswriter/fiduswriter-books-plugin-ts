@@ -108,11 +108,40 @@ export class EpubBookExporter {
         this.images = []
         this.fontFiles = []
         this.httpFiles = []
-        this.styleSheets = [{url: staticUrl("css/book.css")}]
+        // Book exports load the shared document stylesheet (with the bundled
+        // Libertinus fallback fonts) first and the book-specific stylesheet on
+        // top so book rules can override the base ones.
+        this.styleSheets = [
+            {url: staticUrl("css/document/document.css")},
+            {url: staticUrl("css/book.css")}
+        ]
         this.chapters = []
         this.contentItems = []
         this.includeZips = []
         this.math = false
+    }
+
+    // The open-license (SIL OFL) Libertinus Serif/Mono fallback fonts bundled
+    // with @fiduswriter/document. css/document.css references them through
+    // relative @font-face url()s (fonts/...), so they must ship in the export
+    // next to the stylesheet under css/fonts/ to keep the fallback
+    // self-contained. Chapters are converted with HTMLExporterConvert directly
+    // (not the document HTMLExporter), so the fonts have to be added here.
+    static FALLBACK_FONTS = [
+        "LibertinusSerif-Regular.ttf",
+        "LibertinusSerif-Bold.ttf",
+        "LibertinusSerif-Italic.ttf",
+        "LibertinusSerif-BoldItalic.ttf",
+        "LibertinusMono-Regular.ttf"
+    ]
+
+    addFallbackFonts(): void {
+        EpubBookExporter.FALLBACK_FONTS.forEach(filename => {
+            this.fontFiles.push({
+                url: staticUrl(`css/document/fonts/${filename}`),
+                filename: `css/fonts/${filename}`
+            })
+        })
     }
 
     async init(progressCallback?: ProgressCallback): Promise<Blob | false> {
@@ -132,6 +161,7 @@ export class EpubBookExporter {
         })
 
         this.addBookStyle()
+        this.addFallbackFonts()
         return this.exportContents()
     }
 
@@ -417,6 +447,12 @@ export class EpubBookExporter {
             return Object.assign({}, file, {filename: `EPUB/${file.filename}`})
         })
         this.fontFiles = this.fontFiles.map(file =>
+            Object.assign({}, file, {filename: `EPUB/${file.filename}`})
+        )
+        // httpFiles carries the images and font files added before prefixing;
+        // they must also live under EPUB/ so the paths referenced from the
+        // OPF, xhtml and CSS @font-face rules (all relative to EPUB/) resolve.
+        this.httpFiles = this.httpFiles.map(file =>
             Object.assign({}, file, {filename: `EPUB/${file.filename}`})
         )
         this.includeZips = this.includeZips.map(file =>

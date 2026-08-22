@@ -211,7 +211,6 @@ export const htmlBookIndexTemplate = ({
                 : ""
         }
         <title>${escapeText(book.title)}</title>
-        <link type="text/css" rel="stylesheet" href="css/book.css" />
         ${styleSheets
             .map(
                 sheet =>

@@ -49,6 +49,7 @@ Do **not** put in this repository:
 │   ├── importer/         # Book import filters
 │   ├── exporter/         # Book export filters
 │   └── i18n.ts           # Book-level i18n helpers
+├── css/                  # Book export stylesheet (book.css)
 ├── dist/                 # Compiled JS, .d.ts and source maps (generated)
 ├── test/                 # Jest tests
 ├── package.json

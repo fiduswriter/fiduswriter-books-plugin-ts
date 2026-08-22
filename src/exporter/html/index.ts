@@ -112,7 +112,13 @@ export class HTMLBookExporter {
             : htmlBookIndexBodyTemplate) as unknown as (args: Record<string, unknown>) => string
         this.singleFileHTMLBookTemplate = singleFileHTMLBookTemplate
         this.singleFileHTMLBookCSSTemplate = singleFileHTMLBookCSSTemplate
-        this.styleSheets = [{url: staticUrl("css/book.css")}]
+        // Book exports load the shared document stylesheet (with the bundled
+        // Libertinus fallback fonts) first and the book-specific stylesheet on
+        // top so book rules can override the base ones.
+        this.styleSheets = [
+            {url: staticUrl("css/document/document.css")},
+            {url: staticUrl("css/book.css")}
+        ]
     }
 
     async init(progressCallback?: ProgressCallback): Promise<Blob | false | void> {
@@ -218,7 +224,17 @@ export class HTMLBookExporter {
             if (!contents) {
                 continue
             }
-            this.httpFiles = this.httpFiles.concat(httpFiles)
+            // Each chapter's document exporter bundles the Libertinus fallback
+            // fonts into its httpFiles. Deduplicate by filename so a multi-chapter
+            // book only fetches and embeds each font once.
+            this.httpFiles = this.httpFiles.concat(
+                httpFiles.filter(
+                    file =>
+                        !this.httpFiles.some(
+                            existing => existing.filename === file.filename
+                        )
+                )
+            )
 
             footnoteCounter = converter.fnCounter
             affiliationCounter = converter.affCounter
