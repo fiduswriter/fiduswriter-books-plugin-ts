@@ -121,18 +121,20 @@ export class EpubBookExporter {
         this.math = false
     }
 
-    // The open-license (SIL OFL) Libertinus Serif/Mono fallback fonts bundled
-    // with @fiduswriter/document. css/document.css references them through
-    // relative @font-face url()s (fonts/...), so they must ship in the export
-    // next to the stylesheet under css/fonts/ to keep the fallback
-    // self-contained. Chapters are converted with HTMLExporterConvert directly
-    // (not the document HTMLExporter), so the fonts have to be added here.
+    // The open-license (SIL OFL) Libertinus Serif + JetBrains Mono fallback
+    // fonts bundled with @fiduswriter/document. css/document.css references
+    // them through relative @font-face url()s (fonts/...), so they must ship
+    // in the export next to the stylesheet under css/fonts/ to keep the
+    // fallback self-contained. Chapters are converted with
+    // HTMLExporterConvert directly (not the document HTMLExporter), so the
+    // fonts have to be added here.
     static FALLBACK_FONTS = [
         "LibertinusSerif-Regular.ttf",
         "LibertinusSerif-Bold.ttf",
         "LibertinusSerif-Italic.ttf",
         "LibertinusSerif-BoldItalic.ttf",
-        "LibertinusMono-Regular.ttf"
+        "JetBrainsMono-Regular.ttf",
+        "JetBrainsMono-Bold.ttf"
     ]
 
     addFallbackFonts(): void {
