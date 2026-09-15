@@ -26,6 +26,22 @@ describe("Native book exporter / reader round-trip", () => {
         const buffer = await blob.arrayBuffer()
         const zip = await JSZip.loadAsync(buffer)
 
+        // Container hardening: the first entry must be an uncompressed
+        // "mimetype" entry so that content sniffers find the media type at the
+        // fixed byte offset 38.
+        const bytes = new Uint8Array(buffer)
+        const bookMimetype = "application/vnd.fiduswriter.book+zip"
+        expect(
+            String.fromCharCode(bytes[0], bytes[1], bytes[2], bytes[3])
+        ).toBe("PK\x03\x04")
+        expect(bytes[8] | (bytes[9] << 8)).toBe(0)
+        expect(new TextDecoder().decode(bytes.slice(30, 38))).toBe("mimetype")
+        expect(
+            new TextDecoder().decode(
+                bytes.slice(38, 38 + bookMimetype.length)
+            )
+        ).toBe(bookMimetype)
+
         // The archive marks itself as a Fidusbook.
         expect(zip.files["book.json"]).toBeDefined()
         expect(zip.files["filetype-version"]).toBeDefined()
