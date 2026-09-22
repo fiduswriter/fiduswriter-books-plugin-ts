@@ -1,12 +1,13 @@
 /**
  * Print book exporter.
  *
- * Uses @vivliostyle/print to render the book in the browser.
+ * Renders the book in the browser using the selected pagination engine (see
+ * `@fiduswriter/document/exporter/print`).
  */
 
 import type {Schema} from "prosemirror-model"
 import type {CSL, User} from "@fiduswriter/document"
-import {printHTML} from "@vivliostyle/print"
+import {getPrintEngine} from "@fiduswriter/document/exporter/print/index"
 
 import type {Book, BookStyles, DocumentListEntry} from "../../types.js"
 import {HTMLBookExporter} from "../html/index.js"
@@ -54,30 +55,11 @@ export class PrintBookExporter extends HTMLBookExporter {
         if (!htmlDoc) {
             return
         }
-        const config: {title: string; printCallback?: (iframeWin: Window) => void} = {
-            title: this.book.title
+        const engine = getPrintEngine()
+        ;(window as unknown as {printInstance?: unknown}).printInstance = {
+            engine: engine.name
         }
-
-        if (navigator.userAgent.includes("Gecko/")) {
-            config.printCallback = (iframeWin: Window) => {
-                const oldBody = document.body
-                document.body.parentElement!.dataset.vivliostylePaginated =
-                    "true"
-                document.body = iframeWin.document.body
-                iframeWin.document
-                    .querySelectorAll("style")
-                    .forEach(el => document.body.appendChild(el))
-                const backgroundStyle = document.createElement("style")
-                backgroundStyle.innerHTML = "body {background-color: white;}"
-                document.body.appendChild(backgroundStyle)
-                window.print()
-                document.body = oldBody
-                delete document.body.parentElement!.dataset
-                    .vivliostylePaginated
-            }
-        }
-
-        printHTML(htmlDoc, config)
+        await engine.print({html: htmlDoc, title: this.book.title})
     }
 
     async loadStyle(sheet: {
