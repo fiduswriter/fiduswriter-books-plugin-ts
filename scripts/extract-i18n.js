@@ -18,8 +18,8 @@ import {
     readdirSync,
     existsSync
 } from "node:fs"
-import { join, dirname } from "node:path"
-import { fileURLToPath } from "node:url"
+import {join, dirname} from "node:path"
+import {fileURLToPath} from "node:url"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = join(__dirname, "..")
@@ -36,7 +36,7 @@ const msgids = new Set()
 
 function scanDir(dir) {
     if (!existsSync(dir)) return
-    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    for (const entry of readdirSync(dir, {withFileTypes: true})) {
         const full = join(dir, entry.name)
         if (
             entry.isDirectory() &&
@@ -66,7 +66,7 @@ if (msgids.size === 0) {
     process.exit(0)
 }
 
-const languages = readdirSync(djangoLocalePath, { withFileTypes: true })
+const languages = readdirSync(djangoLocalePath, {withFileTypes: true})
     .filter(e => e.isDirectory())
     .map(e => e.name)
 
@@ -146,7 +146,7 @@ for (const lang of languages) {
         const translation = translationMap.get(msgid)
         const msgstr = translation ? translation.msgstr : ""
         const comment = translation ? translation.comment : ""
-        entries.push({ msgid, msgstr, comment })
+        entries.push({msgid, msgstr, comment})
         if (msgstr) totalTranslated++
     }
     entries.sort((a, b) => a.msgid.localeCompare(b.msgid))
@@ -175,7 +175,7 @@ for (const lang of languages) {
         .join("")
 
     const langDir = join(root, "locale", lang, "LC_MESSAGES")
-    mkdirSync(langDir, { recursive: true })
+    mkdirSync(langDir, {recursive: true})
     writeFileSync(join(langDir, "messages.po"), header + body, "utf8")
 
     const translated = entries.filter(e => e.msgstr).length

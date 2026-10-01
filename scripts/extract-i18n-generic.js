@@ -18,8 +18,8 @@ import {
     readdirSync,
     existsSync
 } from "node:fs"
-import { join, dirname } from "node:path"
-import { fileURLToPath } from "node:url"
+import {join, dirname} from "node:path"
+import {fileURLToPath} from "node:url"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = join(__dirname, "..")
@@ -36,7 +36,7 @@ const msgids = new Set()
 
 function scanDir(dir) {
     if (!existsSync(dir)) return
-    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    for (const entry of readdirSync(dir, {withFileTypes: true})) {
         const full = join(dir, entry.name)
         if (
             entry.isDirectory() &&
@@ -69,7 +69,7 @@ if (msgids.size === 0) {
 }
 
 // Build translation maps from djangojs.po — including obsolete #~ entries
-const languages = readdirSync(djangoLocalePath, { withFileTypes: true })
+const languages = readdirSync(djangoLocalePath, {withFileTypes: true})
     .filter(e => e.isDirectory())
     .map(e => e.name)
 
@@ -159,10 +159,10 @@ for (const lang of languages) {
 
     function saveObsolete() {
         if (obsMsgid && obsMsgstr && !translationMap.has(obsMsgid)) {
-            translationMap.set(obsMsgid, { msgstr: obsMsgstr, comment: "" })
+            translationMap.set(obsMsgid, {msgstr: obsMsgstr, comment: ""})
         }
         if (obsPrevMsgid && obsMsgstr && !translationMap.has(obsPrevMsgid)) {
-            translationMap.set(obsPrevMsgid, { msgstr: obsMsgstr, comment: "" })
+            translationMap.set(obsPrevMsgid, {msgstr: obsMsgstr, comment: ""})
         }
     }
 
@@ -268,7 +268,7 @@ for (const lang of languages) {
         // Prefer existing translation over djangojs.po lookup (no synthetic comment)
         const existing = existingTranslations.get(msgid)
         const t = existing
-            ? { msgstr: existing, comment: "" }
+            ? {msgstr: existing, comment: ""}
             : translationMap.get(msgid)
         entries.push({
             msgid,
@@ -305,7 +305,7 @@ for (const lang of languages) {
         .join("")
 
     const langDir = join(root, "locale", lang, "LC_MESSAGES")
-    mkdirSync(langDir, { recursive: true })
+    mkdirSync(langDir, {recursive: true})
     writeFileSync(join(langDir, "messages.po"), header + body, "utf8")
 
     const translated = entries.filter(e => e.msgstr).length

@@ -25,8 +25,8 @@ import {
     readdirSync,
     existsSync
 } from "node:fs"
-import { join, dirname } from "node:path"
-import { fileURLToPath } from "node:url"
+import {join, dirname} from "node:path"
+import {fileURLToPath} from "node:url"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const root = join(__dirname, "..")
@@ -52,7 +52,7 @@ try {
 
 function ensureDir(dir) {
     if (!existsSync(dir)) {
-        mkdirSync(dir, { recursive: true })
+        mkdirSync(dir, {recursive: true})
     }
 }
 
@@ -64,7 +64,7 @@ const langs = process.argv.slice(2)
 const allLangs =
     langs.length > 0
         ? langs
-        : readdirSync(localeDir, { withFileTypes: true })
+        : readdirSync(localeDir, {withFileTypes: true})
               .filter(e => e.isDirectory())
               .map(e => e.name)
 
