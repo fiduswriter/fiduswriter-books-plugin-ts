@@ -11,7 +11,7 @@ import {createSlug} from "@fiduswriter/document/exporter/tools/file"
 import {ZipFileCreator} from "fwtoolkit/file/zip"
 import {LANGUAGES} from "@fiduswriter/document/schema/const"
 import {gettext, get, staticUrl} from "fwtoolkit"
-import pretty from "pretty"
+import pretty from "../pretty.js"
 
 import type {Book, BookStyle, BookStyles, DocumentListEntry} from "../../types.js"
 import {getMissingChapterData} from "../tools.js"

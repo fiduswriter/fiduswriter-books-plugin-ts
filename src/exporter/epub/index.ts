@@ -11,7 +11,7 @@ import {removeHidden} from "@fiduswriter/document/exporter/tools/doc_content"
 import {createSlug} from "@fiduswriter/document/exporter/tools/file"
 import {ZipFileCreator} from "fwtoolkit/file/zip"
 import {gettext, get, staticUrl} from "fwtoolkit"
-import pretty from "pretty"
+import pretty from "../pretty.js"
 
 import type {Book, BookCoverImage, BookStyles, CSL, DocumentListEntry, User} from "../../types.js"
 import type {FidusNode} from "@fiduswriter/document"

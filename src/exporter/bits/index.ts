@@ -3,7 +3,7 @@
  */
 
 import type {Schema} from "prosemirror-model"
-import pretty from "pretty"
+import pretty from "../pretty.js"
 import {JATSExporterConverter} from "@fiduswriter/document/exporter/jats/convert"
 import {darManifest} from "@fiduswriter/document/exporter/jats/templates"
 import type {ProgressCallback} from "@fiduswriter/document/exporter/tools/progress"
