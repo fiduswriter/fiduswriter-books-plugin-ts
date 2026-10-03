@@ -80,6 +80,10 @@
         "./i18n": {
             "types": "./dist/i18n.d.ts",
             "default": "./dist/i18n.js"
+        },
+        "./ui/book_dialog": {
+            "types": "./dist/ui/book_dialog/index.d.ts",
+            "default": "./dist/ui/book_dialog/index.js"
         }
     },
     "directories": {
