@@ -13,8 +13,8 @@ importers:
   .:
     dependencies:
       '@fiduswriter/document':
-        specifier: ^0.3.17
-        version: 0.3.17(@pdfme/pdf-lib@6.2.2)
+        specifier: ^0.3.19
+        version: 0.3.19(@pdfme/pdf-lib@6.2.2)
       bibliojson:
         specifier: ^4.0.4
         version: 4.1.0
@@ -319,8 +319,8 @@ packages:
     resolution: {integrity: sha512-IkO+/KEUvwbVpiURZg+P7zF74z5Jxe0UgJxVni+RtoHQ6IZieXaO02kmadomap/q+l6bc/jdPGGqTjhuZnuz1Q==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
-  '@fiduswriter/document@0.3.17':
-    resolution: {integrity: sha512-gq5nWX8ofe0Nh/MgEjEiYHLZFN2sNSx+Sc32S5y2x6wJVOo5ERGxzWYxR5gy37wMWiQ/dAB+gVuq+jwEdGgYGw==}
+  '@fiduswriter/document@0.3.19':
+    resolution: {integrity: sha512-Yte18A8Yr4NmVJC6XzAwZ/IookgEw0ZLXCP5ubkUMlSml67ek1+d73upIniZLGCd4PtQn1d95Vhg/lGrbCPXlA==}
 
   '@humanfs/core@0.19.2':
     resolution: {integrity: sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA==}
@@ -1945,11 +1945,11 @@ packages:
   package-json-from-dist@1.0.1:
     resolution: {integrity: sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw==}
 
-  paged-with-floats@0.11.1:
-    resolution: {integrity: sha512-VqlEMdzBc6/twdyFx5RojmxPsS8p4rk2Srjc9A+ak6U/QI+MohQLL1653iYq6VjbXw3e0cEZxAdXIjPWZljRqg==}
+  pages-to-pdf@0.4.1:
+    resolution: {integrity: sha512-Y91uRab9lJNzw9M89QPzX6pd/ITG9MGSMx7RCA9cY7l3SM3oh5Tj9i8XTrIBxUyffiHFWVcsz+W6MotuwMwqBA==}
 
-  pages-to-pdf@0.3.10:
-    resolution: {integrity: sha512-k/WF0d7AyOWHM5v8V6qWEjYmWdZbe9sL6TYoWoGlTz7wVEje6nMaGV1qKzu2+wTYfjNugTtIdCyXAnF/nt85Vw==}
+  paginate-for-print@1.1.0:
+    resolution: {integrity: sha512-XZNKzznRo+ntB3LHA4Cyki7zkjDC6nha4YwXTpKeAy2/2PlEWE3av7Vl1+GR3tR0Exuryhybzazs0A+YvFl0tA==}
 
   pako@0.2.9:
     resolution: {integrity: sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA==}
@@ -2613,7 +2613,7 @@ snapshots:
       '@eslint/core': 1.2.1
       levn: 0.4.1
 
-  '@fiduswriter/document@0.3.17(@pdfme/pdf-lib@6.2.2)':
+  '@fiduswriter/document@0.3.19(@pdfme/pdf-lib@6.2.2)':
     dependencies:
       '@mathjax/mathjax-newcm-font': 4.1.3
       '@mathjax/src': 4.1.3
@@ -2629,8 +2629,8 @@ snapshots:
       mathml-to-latex: 1.8.0
       mathml2omml: 0.5.0
       orderedmap: 2.1.1
-      paged-with-floats: 0.11.1(@pdfme/pdf-lib@6.2.2)
-      pages-to-pdf: 0.3.10
+      pages-to-pdf: 0.4.1
+      paginate-for-print: 1.1.0(@pdfme/pdf-lib@6.2.2)
       prettier: 3.9.9
       prosemirror-commands: 1.7.2
       prosemirror-gapcursor: 1.4.1
@@ -4428,7 +4428,15 @@ snapshots:
 
   package-json-from-dist@1.0.1: {}
 
-  paged-with-floats@0.11.1(@pdfme/pdf-lib@6.2.2):
+  pages-to-pdf@0.4.1:
+    dependencies:
+      '@mathjax/src': 4.1.3
+      '@pdfme/pdf-lib': 6.2.2
+      fonteditor-core: 2.6.3
+      fontkit: 2.0.4
+      svg4pdf-lib: 0.1.2(@pdfme/pdf-lib@6.2.2)
+
+  paginate-for-print@1.1.0(@pdfme/pdf-lib@6.2.2):
     dependencies:
       '@babel/runtime': 7.29.7
       '@chenglou/pretext': 0.0.8
@@ -4436,20 +4444,12 @@ snapshots:
       css-tree: 1.1.3
       event-emitter: 0.3.5
       fontkit: 2.0.4
-      pages-to-pdf: 0.3.10
+      pages-to-pdf: 0.4.1
       svg4pdf-lib: 0.1.2(@pdfme/pdf-lib@6.2.2)
     optionalDependencies:
       fonteditor-core: 2.6.3
     transitivePeerDependencies:
       - '@pdfme/pdf-lib'
-
-  pages-to-pdf@0.3.10:
-    dependencies:
-      '@mathjax/src': 4.1.3
-      '@pdfme/pdf-lib': 6.2.2
-      fonteditor-core: 2.6.3
-      fontkit: 2.0.4
-      svg4pdf-lib: 0.1.2(@pdfme/pdf-lib@6.2.2)
 
   pako@0.2.9: {}
 
