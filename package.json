@@ -15,13 +15,13 @@
         "export",
         "import"
     ],
-    "homepage": "https://git.fiduswriter.org/fiduswriter/fiduswriter-books-plugin-ts",
+    "homepage": "https://git.fiduswriter.org/fiduswriter/fiduswriter-books-ts",
     "bugs": {
-        "url": "https://git.fiduswriter.org/fiduswriter/fiduswriter-books-plugin-ts/issues"
+        "url": "https://git.fiduswriter.org/fiduswriter/fiduswriter-books-ts/issues"
     },
     "repository": {
         "type": "git",
-        "url": "https://git.fiduswriter.org/fiduswriter/fiduswriter-books-plugin-ts.git"
+        "url": "https://git.fiduswriter.org/fiduswriter/fiduswriter-books-ts.git"
     },
     "license": "AGPL-3.0",
     "author": "Johannes Wilm",
@@ -109,7 +109,7 @@
         "extract-i18n": "node scripts/extract-i18n.js"
     },
     "dependencies": {
-        "@fiduswriter/document": "^0.3.17",
+        "@fiduswriter/document": "^0.3.19",
         "bibliojson": "^4.0.4",
         "downloadjs": "^1.4.7",
         "fast-deep-equal": "^3.1.3",

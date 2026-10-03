@@ -1,7 +1,7 @@
 # AGENTS.md — @fiduswriter/books-document
 
 This file contains information for AI coding agents working on the
-`fiduswriter-books-plugin-ts` repository. Read this first if you are unfamiliar
+`fiduswriter-books-ts` repository. Read this first if you are unfamiliar
 with the project.
 
 ## Project overview
@@ -14,7 +14,7 @@ command-line converter.
 
 - Package name: `@fiduswriter/books-document`
 - License: `AGPL-3.0`
-- Repository: `https://git.fiduswriter.org/fiduswriter/fiduswriter-books-plugin-ts.git`
+- Repository: `https://git.fiduswriter.org/fiduswriter/fiduswriter-books-ts.git`
 - Author: Johannes Wilm
 
 ## Scope

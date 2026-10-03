@@ -28,4 +28,4 @@ git push -f origin pages
 
 cd "$ROOT"
 rm -rf "$BUILD_DIR"
-echo "Done. Available at https://fiduswriter.pages.fiduswriter.org/fiduswriter-books-plugin-ts/"
+echo "Done. Available at https://fiduswriter.pages.fiduswriter.org/fiduswriter-books-ts/"
