@@ -94,3 +94,88 @@ describe("Native book exporter / reader round-trip", () => {
         expect(firstContent.content[0].content?.[0]?.text).toBe("Chapter One")
     })
 })
+
+describe("Native book exporter chapter identity", () => {
+    // Regression test: the exporter used to drop both the chapter's `text`
+    // (document id) from book.json and the document `id` from each
+    // chapters/<n>/document.json. The reader then rebuilt every document-list
+    // entry with `id: 0` while book.json referenced `text: 1`, so
+    // `getMissingChapterData`'s lookup
+    // (`documentList.find(doc => doc.id === chapter.text)`) found nothing and
+    // re-exporting an already-written book failed with "you lack access rights
+    // to its chapters". Pin both halves of that linkage here.
+    it("persists the chapter document id so a written book can be re-exported", async () => {
+        const book = makeBook()
+        const documentList = makeDocumentList()
+
+        const first = await new NativeBookExporter(
+            schema,
+            book,
+            user,
+            documentList,
+            new Date()
+        ).init()
+
+        const buffer = await first.arrayBuffer()
+        const zip = await JSZip.loadAsync(buffer)
+
+        // book.json must carry each chapter's document id...
+        const bookJson = JSON.parse(
+            (await zip.file("book.json")?.async("string")) as string
+        )
+        const chapters = bookJson.chapters as Array<{text?: number}>
+        expect(chapters).toHaveLength(2)
+        for (const chapter of chapters) {
+            expect(typeof chapter.text).toBe("number")
+        }
+
+        // ...and each chapter's document.json must carry the matching id, or
+        // the reader cannot line the two up again.
+        for (let index = 0; index < chapters.length; index++) {
+            const docJson = JSON.parse(
+                (await zip.file(`chapters/${index}/document.json`)?.async(
+                    "string"
+                )) as string
+            )
+            expect(typeof docJson.id).toBe("number")
+        }
+
+        // The decisive assertion: read the written book back and export it
+        // again. Before the fix this threw "Cannot produce book as you lack
+        // access rights to its chapters."
+        const {book: readBook, documentList: readList} =
+            await new FidusBookReader().read(buffer)
+        expect(readList.map(doc => doc.id).sort()).toEqual([1, 2])
+
+        const second = await new NativeBookExporter(
+            schema,
+            readBook,
+            user,
+            readList,
+            new Date()
+        ).init()
+        expect(second.size).toBeGreaterThan(0)
+    })
+
+    it("keeps chapter titles and metadata across a round trip", async () => {
+        const book = makeBook()
+        const documentList = makeDocumentList()
+        const blob = await new NativeBookExporter(
+            schema,
+            book,
+            user,
+            documentList,
+            new Date()
+        ).init()
+
+        const {book: readBook, documentList: readList} =
+            await new FidusBookReader().read(await blob.arrayBuffer())
+
+        expect(readBook.title).toBe(book.title)
+        expect(readBook.metadata).toEqual(book.metadata)
+        expect(readList.map(doc => doc.title).sort()).toEqual([
+            "Chapter One",
+            "Chapter Two"
+        ])
+    })
+})

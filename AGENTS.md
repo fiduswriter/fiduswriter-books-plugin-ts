@@ -8,8 +8,9 @@ with the project.
 
 `@fiduswriter/books-document` is a TypeScript library that implements
 book-level importers and exporters for Fidus Writer. It builds on top of
-`@fiduswriter/document` and is consumed by both the `fiduswriter-books-plugin`
-Django plugin and the `@fiduswriter/cli` command-line converter.
+`@fiduswriter/document` and is consumed by the `book` app bundled with the
+`fiduswriter-server-backend` repository and by the `@fiduswriter/cli`
+command-line converter.
 
 - Package name: `@fiduswriter/books-document`
 - License: `AGPL-3.0`
@@ -104,7 +105,7 @@ Tests live in `test/` and run with Jest.
 
 This library is consumed by:
 
-- `fiduswriter-books/` (the Django plugin) for book export logic.
+- the `book` app of `fiduswriter-server-backend` for book export logic.
 - `@fiduswriter/cli` for command-line book conversion.
 
 When publishing a new version, update those consumers and run their tests.
@@ -116,7 +117,8 @@ When publishing a new version, update those consumers and run their tests.
 - Update `package.json` version if needed (`npm version patch|minor|major`).
 - `npm publish` triggers `prepublishOnly`, which builds.
 - Push commits and tags.
-- Update downstream consumers (`@fiduswriter/cli`, `fiduswriter-books/`).
+- Update downstream consumers (`@fiduswriter/cli`, and
+  `fiduswriter-server-backend`'s `fiduswriter/book/package.json5`).
 
 ## Useful references
 

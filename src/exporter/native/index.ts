@@ -99,7 +99,14 @@ export class NativeBookExporter {
             path: this.book.path || "/",
             metadata: this.book.metadata || {},
             settings: this.book.settings || {},
+            // `text` is the chapter's document id and must be persisted: the
+            // reader rebuilds the document list from the chapter entries and
+            // `getMissingChapterData` matches them with
+            // `documentList.find(doc => doc.id === chapter.text)`. Omitting it
+            // makes every re-read of a written book fail to resolve its
+            // chapters, so the book cannot be exported again.
             chapters: sortedChapters.map((chapter, index) => ({
+                text: chapter.text,
                 number: chapter.number,
                 part: chapter.part || "",
                 chapter_index: index
@@ -159,10 +166,22 @@ export class NativeBookExporter {
                             include.filename = `chapters/${index}/${include.filename}`
                         })
 
+                        // `ShrinkFidus` drops the document `id`, but the reader
+                        // rebuilds each document-list entry with
+                        // `id: docJson.id || 0` and `getMissingChapterData`
+                        // matches chapters by `doc.id === chapter.text`. A
+                        // chapter written without its id therefore reads back
+                        // as 0 and cannot be resolved, so re-exporting a book
+                        // would fail. Re-attach it before serializing.
+                        const chapterDoc: Record<string, unknown> = {
+                            id: doc.id,
+                            ...shrunkDoc
+                        }
+
                         textFiles.push(
                             {
                                 filename: `chapters/${index}/document.json`,
-                                contents: JSON.stringify(shrunkDoc)
+                                contents: JSON.stringify(chapterDoc)
                             },
                             {
                                 filename: `chapters/${index}/images.json`,
