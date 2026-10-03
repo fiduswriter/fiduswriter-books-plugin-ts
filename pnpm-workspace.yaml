@@ -1,3 +1,4 @@
+minimumReleaseAge: 0
 allowBuilds:
   '@parcel/watcher': true
   '@swc/core': true
@@ -5,11 +6,6 @@ allowBuilds:
   core-js-pure: true
   es5-ext: true
   unrs-resolver: true
-minimumReleaseAgeExclude:
-  - '@fiduswriter/document@0.3.17'
-  - paged-with-floats@0.11.0
-  - pages-to-pdf@0.3.10
-  - paged-with-floats@0.11.1
 overrides:
   test-exclude: ^8.0.0
   '@xmldom/xmldom': 0.9.12
